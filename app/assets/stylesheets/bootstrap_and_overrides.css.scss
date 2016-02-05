@@ -1,0 +1,42 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 60px;
+}
+
+img {
+  max-width: 100%; 
+}
+
+.btn-primary {
+  background: #ccc;
+  border-color: #ccc;
+  &:hover, &:active, &:focus {
+    background: #888;
+    border-color: #888;
+  }
+}
+
+.flash-message {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: rgba(255,0,0,0.1);
+}
+
+table {
+  margin-top: 20px;
+}
