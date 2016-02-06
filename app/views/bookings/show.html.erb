@@ -1,0 +1,49 @@
+<% provide :header, 'Booking confirmation' %>
+
+<div class="row text-left">
+  <div class="col-md-6 col-md-offset-3">
+    
+    <h2>Your flight details</h2>
+    <table class="table">
+      <tr>
+        <th>From</th>
+        <td><%= @booking.flight.from.city %></td>
+      </tr>
+      <tr>
+        <th>To</th>
+        <td><%= @booking.flight.to.city %></td>
+      </tr>
+      <tr>
+        <th>Flight number</th>
+        <td><%= @booking.flight.id %></td>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <td><%= @booking.flight.start.strftime("%d %B %Y") %></td>
+      </tr>
+      <tr>
+        <th>Departure time</th>
+        <td><%= @booking.flight.start.strftime("%H:%M") %></td>
+      </tr>
+      <tr>
+        <th>Duration</th>
+        <td><%= duration_from_minutes(@booking.flight.duration) %></td>
+      </tr>
+    </table>
+    
+    <% @booking.passengers.each.with_index do |passenger, index| %>
+      <h2>Passenger <%= index + 1 %></h2>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <td><%= passenger.name %></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td><%= passenger.email %></td>
+        </tr>
+      </table>
+    <% end %>
+    
+  </div>
+</div>

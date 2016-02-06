@@ -1,51 +1,34 @@
-<div class="container text-center">
-  
-  <div class="row">
-    <div class="col-xs-12">
-      <h1>Flight booker</h1>
+<% provide :header, 'Flight booker' %>
+
+<div class="row">
+  <%= form_tag '/', method: :get do %>
+    <div class="col-md-3 form-group">
+      <%= label_tag 'from' %>
+      <%= select_tag 'from', options_from_collection_for_select(@airports, 'id', 'city', params[:from] || 1), class: 'form-control' %>
     </div>
-  </div>
-  
-  <% if flash[:error] %>
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="flash-message"><%= flash[:error] %></p>        
-      </div>
+    <div class="col-md-3 form-group">
+      <%= label_tag 'to' %>
+      <%= select_tag 'to', options_from_collection_for_select(@airports, 'id', 'city', params[:to] || 2), class: 'form-control' %>
     </div>
+    <div class="col-md-3 form-group">
+      <%= label_tag 'date' %>
+      <%= date_field_tag 'date', params[:date] || Time.now.strftime("%Y-%m-%d"), class: 'form-control' %>
+    </div>
+    <div class="col-md-3 form-group">
+      <%= label_tag 'passengers' %>
+      <%= select_tag 'passengers', options_for_select([[1, 1], [2, 2], [3, 3], [4, 4]], params[:passengers] || 1), class: 'form-control' %>
+    </div>
+    <%= submit_tag 'Find flights', class: 'btn btn-primary' %>
   <% end %>
-  
+</div>
+
+<% unless @flights.empty? %>
   <div class="row">
-    <div class="col-xs-12">
-      <%= image_tag 'plane.jpg', alt: 'Airplane drawn in pencil' %>
-    </div>
-  </div>
-  
-  <div class="row">
-    <%= form_tag '/', method: :get do %>
-      <div class="col-md-3 form-group">
-        <%= label_tag 'from' %>
-        <%= select_tag 'from', options_from_collection_for_select(@airports, 'id', 'city', params[:from] || 1), class: 'form-control' %>
-      </div>
-      <div class="col-md-3 form-group">
-        <%= label_tag 'to' %>
-        <%= select_tag 'to', options_from_collection_for_select(@airports, 'id', 'city', params[:to] || 2), class: 'form-control' %>
-      </div>
-      <div class="col-md-3 form-group">
-        <%= label_tag 'date' %>
-        <%= date_field_tag 'date', params[:date] || Time.now.strftime("%Y-%m-%d"), class: 'form-control' %>
-      </div>
-      <div class="col-md-3 form-group">
-        <%= label_tag 'passengers' %>
-        <%= select_tag 'passengers', options_for_select([[1, 1], [2, 2], [3, 3], [4, 4]], params[:passengers] || 1), class: 'form-control' %>
-      </div>
-      <%= submit_tag 'Find flights', class: 'btn btn-primary' %>
-    <% end %>
-  </div>
-  
-  <% if @flights %>
-    <div class="row">
+    <%= form_tag new_booking_path, method: :get do %>
+      <%= hidden_field_tag 'passengers', params[:passengers] %>
       <table class="table table-striped text-left">
         <tr>
+          <th></th>
           <th>From</th>
           <th>To</th>
           <th>Departure time</th>
@@ -53,6 +36,7 @@
         </tr>
         <% @flights.each do |flight| %>
           <tr>
+            <td><%= radio_button_tag 'flight_id', flight.id %></td>
             <td><%= flight.from.city %></td>
             <td><%= flight.to.city %></td>
             <td><%= flight.start.strftime("%H:%M") %></td>
@@ -60,7 +44,7 @@
           </tr>
         <% end %>
       </table>
-    </div>
-  <% end %>
-  
-</div>
+      <%= submit_tag 'Book', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>
