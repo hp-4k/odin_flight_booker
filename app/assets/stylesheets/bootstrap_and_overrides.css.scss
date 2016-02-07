@@ -8,11 +8,30 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  padding-bottom: 100px;
 }
 
 h1 {
   font-weight: bold;
   font-size: 60px;
+}
+
+nav {
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+    a, a:hover, a:active {
+      color: black;
+    }
+  }
 }
 
 img {
@@ -39,4 +58,8 @@ img {
 
 table {
   margin-top: 20px;
+}
+
+.about p {
+  font-size: 18px;
 }

@@ -16,16 +16,16 @@
     </div>
     <div class="col-md-3 form-group">
       <%= label_tag 'passengers' %>
-      <%= select_tag 'passengers', options_for_select([[1, 1], [2, 2], [3, 3], [4, 4]], params[:passengers] || 1), class: 'form-control' %>
+      <%= select_tag 'passengers', options_for_select([[1, 1], [2, 2], [3, 3], [4, 4]], params[:passengers] || 1), class: 'form-control', id: 'passengers_dropdown' %>
     </div>
     <%= submit_tag 'Find flights', class: 'btn btn-primary' %>
   <% end %>
 </div>
 
-<% unless @flights.empty? %>
+<% unless !@flights || @flights.empty? %>
   <div class="row">
     <%= form_tag new_booking_path, method: :get do %>
-      <%= hidden_field_tag 'passengers', params[:passengers] %>
+      <%= hidden_field_tag 'passengers', params[:passengers], id: 'passengers_hidden' %>
       <table class="table table-striped text-left">
         <tr>
           <th></th>

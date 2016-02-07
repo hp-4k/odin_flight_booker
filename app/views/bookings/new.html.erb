@@ -2,18 +2,18 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <p>You are booking a flight from <strong><%= @flight.from.city %></strong>
-    to <strong><%= @flight.to.city %></strong> departing on<br>
-    <strong><%= @flight.start.strftime("%d %B %Y") %></strong>
-    at <strong><%= @flight.start.strftime("%H:%M") %></strong>.</p>
+    <p>You are booking a flight no. <strong><%= @booking.flight.id %></strong> from
+    <strong><%= @booking.flight.from.city %></strong> to
+    <strong><%= @booking.flight.to.city %></strong> departing on
+    <strong><%= @booking.flight.start.strftime("%d %B %Y") %></strong> at
+    <strong><%= @booking.flight.start.strftime("%H:%M") %></strong>.</p>
     <p>Please enter passenger information below.</p>
   <%= form_for @booking do |f| %>
     <%= f.hidden_field_tag 'passengers', params[:passengers] %>
-    <p>FLIGHT ID: <%= @booking.flight.id %></p>
     <%= f.hidden_field :flight_id %>
     <% @booking.passengers.each.with_index do |passenger, index| %>
       <%= f.fields_for :passengers, passenger do |passengers_f| %>
-        <h2>Passenger #<%= index + 1 %></h2>
+        <h2>Passenger <%= index + 1 %></h2>
         <div class="form-group">
           <%= passengers_f.label :name %>
           <%= passengers_f.text_field :name, class: 'form-control' %>

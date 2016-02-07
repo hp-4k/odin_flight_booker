@@ -1,8 +1,13 @@
 class BookingsController < ApplicationController
   
   def new
-    @flight = Flight.find(params[:flight_id])  
-    @booking = @flight.bookings.build
+    unless params[:flight_id]
+      flash[:error] = "You have not selected a flight."
+      redirect_to session.delete(:return_to) and return
+    end
+    
+    flight = Flight.find(params[:flight_id])  
+    @booking = flight.bookings.build
     params[:passengers].to_i.times do
       @booking.passengers.build      
     end
