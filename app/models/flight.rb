@@ -4,4 +4,13 @@ class Flight < ActiveRecord::Base
   has_many :bookings
   
   default_scope -> { order(:start) }
+  
+  def from_city
+    from.city
+  end
+  
+  def to_city
+    to.city
+  end
+  
 end

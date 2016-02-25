@@ -16,6 +16,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
+      send_confirmation_emails
       redirect_to @booking
     else
       flash.now[:error] = "All fields are required."
@@ -32,6 +33,15 @@ class BookingsController < ApplicationController
   
     def booking_params
       params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])
+    end
+    
+    def send_confirmation_emails
+      flight = Flight.find(params[:booking][:flight_id])
+      params[:passengers].to_i.times do |i|
+        passenger_name = params[:booking][:passengers_attributes][i.to_s][:name]
+        passenger_email = params[:booking][:passengers_attributes][i.to_s][:email]
+        PassengerMailer.thank_you_email(flight, passenger_name, passenger_email).deliver
+      end
     end
     
 end

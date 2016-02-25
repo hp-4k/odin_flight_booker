@@ -1,0 +1,14 @@
+Dear <%= @name %>,
+
+This is a confirmation of your recent flight booking made on our Flight Booker website. Please see the details of your flight listed below.
+
+From: <%= @flight.from_city %>
+To: <%= @flight.to_city %>
+Departure date and time: <%= @flight.start %>
+Duration: <%= @flight.duration %>
+
+If you have received this email by accident, you can simply ignore it.
+
+Kind regards,
+
+The Flight Booker team

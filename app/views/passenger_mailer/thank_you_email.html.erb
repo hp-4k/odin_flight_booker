@@ -1,0 +1,28 @@
+<p>Dear <%= @name %>,</p>
+
+<p>This is a confirmation of your recent flight booking made on our <%= link_to 'Flight booker', root_url %> website. Please see the details of your flight listed below.</p>
+
+<table>
+  <tr>
+    <th>From</th>
+    <td><%= @flight.from_city %></td>
+  </tr>
+  <tr>
+    <th>To</th>
+    <td><%= @flight.to_city %></td>
+  </tr>
+  <tr>
+    <th>Departure date and time</th>
+    <td><%= @flight.start %></td>
+  </tr>
+  <tr>
+    <th>Duration</th>
+    <td><%= @flight.duration %></td>
+  </tr>
+</table>
+
+<p>If you have received this email by accident, you can simply ignore it.</p>
+
+<p>Kind regards,</p>
+
+<p>The Flight Booker team</p>
